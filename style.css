@@ -1,0 +1,20 @@
+.boop{
+    color: red;
+    text-decoration: line-through;
+
+}
+h1{
+    text-align: center;
+}
+td{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+
