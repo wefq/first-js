@@ -1,9 +1,12 @@
-.boop{
-    color: red;
-    text-decoration: line-through;
-
-}
 h1{
+    text-align: center;
+    color: aquamarine;
+}
+h2{
+    text-align: center;
+    margin-top: 50px;
+}
+p{
     text-align: center;
 }
 td{
@@ -18,3 +21,40 @@ td{
     background-color: green;
 }
 
+body{
+    background: url("assets/Ocean.png") no-repeat;
+    background-size: 100%;
+    font-family: 'Press Start 2P';
+    font-size: 15px;
+}
+
+button{
+    display:block;
+    font-family: 'Press Start 2P';
+    margin-left: auto;
+    margin-right: auto;
+}
+.pushable {
+    background: #214F4B;
+    
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    
+  }
+  .front {
+    background: #16C172;
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    
+    color: white;
+    transform: translateY(-6px);
+  }
+
+  .pushable:active .front {
+    transform: translateY(-2px);
+  }
