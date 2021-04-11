@@ -99,7 +99,26 @@ function getShipsCoordinatesX(shipsLength)
     return newShip;
 }
 
+function getCoordinates(direction, length){
+    let coordinates;
+    if (direction == 'Y'){
+        coordinates = getShipsCoordinatesY(length);
+    }
+    else {
+        coordinates = getShipsCoordinatesX(length);
+    }
+    return coordinates;
+}
+
 let field = new Array(10).fill(0).map(() => new Array(10).fill(0));
+
+class Ship {
+    constructor() {
+            this.length = getShipsLength(),
+            this.direction = getShipsDirection(),
+            this.coordinates = getCoordinates(this.direction, this.length);
+    }
+}
 
 let allShips = [];
 let lengthOfAllships = 0;
@@ -107,45 +126,37 @@ let lengthOfAllships = 0;
 for (let i = 0; i < 4; i++) 
 {
     console.log('Корабль №' + (i + 1));
-    let ship;
+    let ship = new Ship();
 
-    let length = getShipsLength();
-    console.log('Длина = ' + length);
+    allShips.push(ship);
 
-    lengthOfAllships += length; //Общая длина кораблей, чтобы знать, сколько всего попаданий нужно
+    lengthOfAllships += ship.length; //Общая длина кораблей, чтобы знать, сколько всего попаданий нужно
 
-    let direction = getShipsDirection();
-    console.log('Корабль направлен по оси ' + direction);
-
-    if (direction == 'Y') 
+    if (allShips[i].direction == 'Y') 
     {
-        ship = getShipsCoordinatesY(length);
-        console.log(ship);
-        allShips.push(ship);
-
         //Сдвигаем координаты корабля в зависимости от его номера.
         switch (i) 
         {
             case 1:
-                allShips[i].shipX[0] += 4;
+                allShips[i].coordinates.shipX[0] += 4;
                 break;
 
             case 2:
 
-                for (let j = 0; j < allShips[i].shipY.length; j++) 
+                for (let j = 0; j < allShips[i].coordinates.shipY.length; j++) 
                 {
-                    allShips[i].shipY[j] += 4;
+                    allShips[i].coordinates.shipY[j] += 4;
                 }
 
                 break;
 
             case 3:
 
-                allShips[i].shipX[0] += 4;
+                allShips[i].coordinates.shipX[0] += 4;
 
-                for (let j = 0; j < allShips[i].shipY.length; j++) 
+                for (let j = 0; j < allShips[i].coordinates.shipY.length; j++) 
                 {
-                    allShips[i].shipY[j] += 4;
+                    allShips[i].coordinates.shipY[j] += 4;
                 }
 
                 break;
@@ -154,34 +165,30 @@ for (let i = 0; i < 4; i++)
 
     else 
     {
-        ship = getShipsCoordinatesX(length);
-        console.log(ship);
-        allShips.push(ship);
-
         switch (i) 
         {
             case 1:
 
-                for (let j = 0; j < allShips[i].shipX.length; j++) 
+                for (let j = 0; j < allShips[i].coordinates.shipX.length; j++) 
                 {
-                    allShips[i].shipX[j] += 4;
+                    allShips[i].coordinates.shipX[j] += 4;
                 }
 
                 break;
 
             case 2:
 
-                allShips[i].shipY[0] += 4;
+                allShips[i].coordinates.shipY[0] += 4;
 
                 break;
 
             case 3:
 
-                allShips[i].shipY[0] += 4;
+                allShips[i].coordinates.shipY[0] += 4;
                 
-                for (var j = 0; j < allShips[i].shipX.length; j++) 
+                for (var j = 0; j < allShips[i].coordinates.shipX.length; j++) 
                 {
-                    allShips[i].shipX[j] += 4;
+                    allShips[i].coordinates.shipX[j] += 4;
                 }
 
                 break;
@@ -193,24 +200,25 @@ for (let i = 0; i < 4; i++)
 //располагаем корабли на поле (1 - наличие корабля)
 for (let i = 0; i < 4; i++)
 {
-    if (allShips[i].shipY.length > allShips[i].shipX.length)
+    if (allShips[i].coordinates.shipY.length > allShips[i].coordinates.shipX.length)
     {
-        for (let j = 0; j < allShips[i].shipY.length; j++)
+        for (let j = 0; j < allShips[i].coordinates.shipY.length; j++)
         {
-            field[allShips[i].shipY[j]][allShips[i].shipX] = 1;
+            field[allShips[i].coordinates.shipY[j]][allShips[i].coordinates.shipX] = 1;
         };
     }
 
     else
     {
-        for (let j = 0; j < allShips[i].shipX.length; j++)
+        for (let j = 0; j < allShips[i].coordinates.shipX.length; j++)
         {
-            field[allShips[i].shipY][allShips[i].shipX[j]] = 1;
+            field[allShips[i].coordinates.shipY][allShips[i].coordinates.shipX[j]] = 1;
         };
     };
 }
 
 console.log('Расположение кораблей на поле: ');
 console.log(field);
+
 
 export {field as newField, lengthOfAllships as newLengthOfAllships}

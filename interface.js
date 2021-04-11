@@ -130,3 +130,4 @@ function showResults() {
     document.body.appendChild(MISSES);
     document.body.appendChild(OVERALLCLICKS);
 }
+
